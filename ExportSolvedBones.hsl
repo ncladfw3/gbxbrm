@@ -1,0 +1,20 @@
+string $exportFBXFileName;
+string $ScenePath = `getSavePath`;
+string $SceneName = `getSceneName`;
+$exportFBXFileName = $ScenePath + $SceneName + ".fbx";
+
+selectByType Bone;
+string $selected[] = `getModules -selected`;
+int $num_selected = `getCount $selected`;
+//check if any bones are selected
+if ( $num_selected >= 1 )
+{
+	selectByType -a Clip;	
+	select -invert;
+	delete;
+	saveFile $exportFBXFileName;
+}
+else
+{
+	print "No bones selected for export.";
+}
